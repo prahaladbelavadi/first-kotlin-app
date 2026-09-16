@@ -11,6 +11,7 @@ import com.example.helloworld.ui.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var currentPageId: Int = R.id.nav_home
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,58 +27,50 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         binding.navView.setNavigationItemSelectedListener { item ->
-            val handled = when (item.itemId) {
-                R.id.drawer_home -> {
-                    showFragment(HomeFragment())
-                    binding.bottomNav.selectedItemId = R.id.nav_home
-                    true
-                }
-                R.id.drawer_posts -> {
-                    showFragment(PostsFragment())
-                    binding.bottomNav.selectedItemId = R.id.nav_posts
-                    true
-                }
-                R.id.drawer_profile -> {
-                    showFragment(ProfileFragment())
-                    binding.bottomNav.selectedItemId = R.id.nav_profile
-                    true
-                }
-                R.id.drawer_settings, R.id.drawer_about -> {
-                    // Placeholder items: no dedicated page yet.
-                    true
-                }
-                else -> false
+            val pageId = when (item.itemId) {
+                R.id.drawer_home -> R.id.nav_home
+                R.id.drawer_posts -> R.id.nav_posts
+                R.id.drawer_profile -> R.id.nav_profile
+                else -> null // Settings/About: no dedicated page yet.
+            }
+            if (pageId != null) {
+                navigateTo(pageId)
             }
             binding.drawerLayout.closeDrawers()
-            handled
+            pageId != null
         }
 
         binding.bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    showFragment(HomeFragment())
-                    true
-                }
-                R.id.nav_posts -> {
-                    showFragment(PostsFragment())
-                    true
-                }
-                R.id.nav_profile -> {
-                    showFragment(ProfileFragment())
-                    true
-                }
-                else -> false
-            }
+            navigateTo(item.itemId)
+            true
         }
 
         if (savedInstanceState == null) {
-            showFragment(HomeFragment())
+            navigateTo(R.id.nav_home)
         }
     }
 
-    private fun showFragment(fragment: Fragment) {
+    // Single source of truth for switching pages: updates the fragment, syncs
+    // the bottom nav's checked state (without re-triggering its own listener,
+    // which previously caused a duplicate fragment to be created), and skips
+    // redundant work if we're already on that page.
+    private fun navigateTo(pageId: Int) {
+        if (pageId == currentPageId && binding.bottomNav.selectedItemId == pageId) return
+        currentPageId = pageId
+
+        val fragment: Fragment = when (pageId) {
+            R.id.nav_home -> HomeFragment()
+            R.id.nav_posts -> PostsFragment()
+            R.id.nav_profile -> ProfileFragment()
+            else -> return
+        }
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
+
+        val menuItem = binding.bottomNav.menu.findItem(pageId)
+        if (menuItem != null && !menuItem.isChecked) {
+            menuItem.isChecked = true
+        }
     }
 }
