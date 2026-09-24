@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.helloworld.databinding.ActivityMainBinding
+import com.example.helloworld.ui.EightFragment
 import com.example.helloworld.ui.HomeFragment
 import com.example.helloworld.ui.PostsFragment
 import com.example.helloworld.ui.ProfileFragment
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.drawer_home -> R.id.nav_home
                 R.id.drawer_posts -> R.id.nav_posts
                 R.id.drawer_profile -> R.id.nav_profile
+                R.id.drawer_eight -> R.id.drawer_eight
                 else -> null // Settings/About: no dedicated page yet.
             }
             if (pageId != null) {
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_home -> HomeFragment()
             R.id.nav_posts -> PostsFragment()
             R.id.nav_profile -> ProfileFragment()
+            R.id.drawer_eight -> EightFragment()
             else -> return
         }
         supportFragmentManager.beginTransaction()

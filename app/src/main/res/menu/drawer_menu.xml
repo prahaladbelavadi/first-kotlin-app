@@ -14,6 +14,10 @@
             android:icon="@android:drawable/ic_menu_preferences"
             android:title="@string/nav_profile" />
         <item
+            android:id="@+id/drawer_eight"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="@string/nav_eight" />
+        <item
             android:id="@+id/drawer_settings"
             android:icon="@android:drawable/ic_menu_manage"
             android:title="@string/nav_settings" />
