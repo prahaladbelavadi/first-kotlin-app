@@ -1,35 +1,23 @@
-# first-kotlin-app
+# A swap space
 
-A first Android app in Kotlin, built up from a plain "Hello World" into a small
-app with navigation and a network-backed CRUD screen.
+An Android app for pushing content back and forth with a companion web
+interface — upload something on one side, it shows up on the other. This
+branch is a clean skeleton: one page and a bare navigation drawer, ready to
+build the sync feature on top of.
 
 ## Features
 
-- **Navigation drawer (sidebar)** with Home, Posts, Profile, and placeholder
-  Settings/About entries.
-- **Bottom navigation** with three tabs (Home, Posts, Profile), kept in sync
-  with the drawer through a single navigation function in `MainActivity`.
-- **Posts screen**: fetches posts from the [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
-  REST API via Retrofit + OkHttp, with create/edit/delete support, a
-  connectivity check before each request, request timeouts, and distinct
-  loading/empty/error (with retry) states instead of crashing on network
-  failure.
+- **Navigation drawer (sidebar)** with a single Home entry, wired up and
+  ready for more.
+- **Home screen**: placeholder single page.
 
 ## Project structure
 
 ```
 app/src/main/java/com/example/helloworld/
-├── MainActivity.kt          # drawer + bottom nav wiring, fragment switching
-├── data/
-│   ├── ApiClient.kt         # Retrofit/OkHttp setup
-│   ├── NetworkUtils.kt      # connectivity check
-│   ├── Post.kt              # Post model
-│   └── PostsApi.kt          # Retrofit endpoint definitions
+├── MainActivity.kt          # drawer wiring, fragment switching
 └── ui/
-    ├── HomeFragment.kt
-    ├── PostsFragment.kt      # list + create/edit/delete
-    ├── PostsAdapter.kt
-    └── ProfileFragment.kt
+    └── HomeFragment.kt
 ```
 
 ## Requirements

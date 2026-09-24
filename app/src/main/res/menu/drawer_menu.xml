@@ -5,21 +5,5 @@
             android:id="@+id/drawer_home"
             android:icon="@android:drawable/ic_menu_myplaces"
             android:title="@string/nav_home" />
-        <item
-            android:id="@+id/drawer_posts"
-            android:icon="@android:drawable/ic_menu_agenda"
-            android:title="@string/nav_posts" />
-        <item
-            android:id="@+id/drawer_profile"
-            android:icon="@android:drawable/ic_menu_preferences"
-            android:title="@string/nav_profile" />
-        <item
-            android:id="@+id/drawer_settings"
-            android:icon="@android:drawable/ic_menu_manage"
-            android:title="@string/nav_settings" />
-        <item
-            android:id="@+id/drawer_about"
-            android:icon="@android:drawable/ic_menu_info_details"
-            android:title="@string/nav_about" />
     </group>
 </menu>
