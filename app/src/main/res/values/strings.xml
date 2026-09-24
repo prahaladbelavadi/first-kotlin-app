@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hello World</string>
+    <string name="app_name">8</string>
     <string name="nav_home">Home</string>
     <string name="nav_posts">Posts</string>
     <string name="nav_profile">Profile</string>
